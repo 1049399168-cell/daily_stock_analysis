@@ -1,0 +1,25 @@
+name: Daily Stock Analysis
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # 每天早上6点
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'  # 你可以指定你的Python版本
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # 确保你的项目有这个文件
+
+      - name: Run stock analysis
+        run: |
+          python main.py  # 根据你的项目入口调整
